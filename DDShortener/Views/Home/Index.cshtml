@@ -1,34 +1,62 @@
-﻿@section scripts {
-    <script src="@Url.Content("~/Scripts/shortURL.js")" type="text/javascript"></script>
-    <script type="text/javascript">
-        function shortening() {
-            requestShortUrl($("#LongUrl").val(), '@Url.Action("ShorterURL", "Home")', '#shorterURLResult', '#output');
-        }
-    </script>
-}
+﻿@model IEnumerable<DDShortener.Models.URL>
 <div class="row" style="padding-top: 30px;">
     <div class="col-md-8">
         <div class="jumbotron">
             <p style="font-weight: bold;">Paste your long URL here:</p>
             <div class="input-group add-on">
-                @using (Html.BeginForm("ShortenURL", "Home", FormMethod.Post, new { id = "shortenForm" }))
-                {
-                    @Html.TextBox("Url", null, new { @class = "form-control input-sm", @placeholder = "Long URL", @name = "Url" })
-                    <div class="input-group-btn">
-                        <button class="btn btn-primary btn-sm" type="submit">Shorten URL</button>
-                    </div>
-                }
+                @Html.Hidden("get-url",@Url.Action("ShortenURL", "Home"), new { id="get-url" })
+                @Html.TextBox("Url", null, new { @class = "form-control input-sm", @placeholder = "Long URL", @name = "Url" })
+                <div class="input-group-btn">
+                    <button class="btn btn-primary btn-sm" onclick="createShortUrl();">Shorten URL</button>
+                </div>
             </div>
             <br />
             <div>All @Request.Url.Authority  URLs and click analytics are public and can be accessed by anyone.</div>
         </div>
     </div>
-    <div class="col-md-4 well" id="output" style="display: none;">
-        <div class="panel panel-default">
-            <div class="panel-heading" style="font-weight: bold;">Your shorter URL:</div>
+    <div class="col-md-4" id="short-url" style="display: none;">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="font-weight: bold;">Url Output:</div>
             <div class="panel-body">
-                <span id="shorterURLResult" style="font-weight: bold; font-size: 16px;"></span>
+                <span id="urlResult" style="font-weight: bold; font-size: 16px;"></span>
+                <div id="qrcode"></div>
             </div>
         </div>
     </div>
 </div>
+<div class="row">
+    @if (Model.Count() > 0)
+    {
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.LongUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.DateCreated)</th>
+                    <th>@Html.DisplayNameFor(model => model.ShortUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.NoClicks)</th>
+                    <th>Details</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr id="row-url-@item.UrlID">
+                        <td>
+                            <a href="@Html.DisplayFor(modelItem => item.LongUrl)" target="_blank">@Html.DisplayFor(modelItem => item.LongUrl)</a>
+                        </td>
+                        <td>
+                            <span title="@Html.DisplayFor(modelItem => item.DateCreated)">@Html.DisplayFor(modelItem => item.DateCreated)</span>
+                        </td>
+                        @{
+                            string _shortUrl = @Request.Url.Scheme + "://" + @Request.Url.Authority + "/" + item.ShortUrl;
+                        }
+                        <td>@Html.Raw("<a target='_blank' href='" + _shortUrl + "'>" + _shortUrl + "</a>")</td>
+                        <td>@Html.DisplayFor(modelItem => item.NoClicks)</td>
+                        <td>@Html.Raw("<a href='javascript:;' onclick='showDetails(this);'>Show</a>")</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+</div>
+@section scripts {
+    <script src="@Url.Content("~/Scripts/ddUrlScript.js")" type="text/javascript"></script>
+}

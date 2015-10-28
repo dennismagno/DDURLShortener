@@ -26,6 +26,7 @@ namespace DDShortener.Models
 
         [Required]
         [Display(Name = "Date Created")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}")]
         public DateTime DateCreated { get; set; }
     }
 }

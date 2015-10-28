@@ -45,3 +45,14 @@ input[type="checkbox"].input-validation-error {
     border-radius: 50%;
     width:200px;
 }
+
+#qrcode {
+    width: 110px;
+    height: 110px;
+    margin-top: 5px;
+}
+
+#qrcode img {
+    width: 105px;
+    height: 105px;
+}
