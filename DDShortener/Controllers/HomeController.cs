@@ -19,6 +19,12 @@ namespace DDShortener.Controllers
         public ActionResult Index()
         {
             ViewBag.Title = "Home";
+         
+            return View();
+        }
+
+        public ActionResult _UrlList()
+        {
             IEnumerable<URL> model = new List<URL>();
             if (User.Identity.IsAuthenticated)
             {
@@ -26,7 +32,7 @@ namespace DDShortener.Controllers
                 model = _db.Urls.Where(u => u.UserID == _userid).OrderByDescending(u => u.DateCreated).AsEnumerable();
             }
 
-            return View(model);
+            return PartialView(model);
         }
 
 
@@ -72,8 +78,12 @@ namespace DDShortener.Controllers
                     _url = "http://" + _url;
                 }
 
+                //Check if user logged;
+                int _userid = WebSecurity.GetUserId(User.Identity.Name);
+                _userid = _userid < 0 ? 0 : _userid;
+             
                 //Check if long Url is already existing in database
-                URL urlExists = _db.Urls.Where(u => u.LongUrl.ToLower() == _url.ToLower()).FirstOrDefault();
+                URL urlExists = _db.Urls.Where(u => u.LongUrl.ToLower() == _url.ToLower() && u.UserID == _userid).FirstOrDefault();
                 if (urlExists != null)
                 {
                     urlExists.ShortUrl = Request.Url.Scheme + "://" + Request.Url.Authority + "/" + urlExists.ShortUrl;
@@ -90,7 +100,6 @@ namespace DDShortener.Controllers
                         DateCreated = DateTime.UtcNow
                     };
 
-                    int _userid = WebSecurity.GetUserId(User.Identity.Name);
                     if (_userid > 0)
                     {
                         sUrl.UserID = _userid;

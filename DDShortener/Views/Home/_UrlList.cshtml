@@ -1,0 +1,32 @@
+﻿@model IEnumerable<DDShortener.Models.URL>
+    @if (Model.Count() > 0)
+    {
+        <div class="col-md-12">
+            <table class="table table-striped table-hover">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.LongUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.DateCreated)</th>
+                    <th>@Html.DisplayNameFor(model => model.ShortUrl)</th>
+                    <th>@Html.DisplayNameFor(model => model.NoClicks)</th>
+                    <th>Details</th>
+                </tr>
+                @foreach (var item in Model)
+                {
+                    <tr id="row-url-@item.UrlID">
+                        <td>
+                            <a href="@Html.DisplayFor(modelItem => item.LongUrl)" target="_blank">@Html.DisplayFor(modelItem => item.LongUrl)</a>
+                        </td>
+                        <td>
+                            <span title="@Html.DisplayFor(modelItem => item.DateCreated)">@Html.DisplayFor(modelItem => item.DateCreated)</span>
+                        </td>
+                        @{
+                    string _shortUrl = @Request.Url.Scheme + "://" + @Request.Url.Authority + "/" + item.ShortUrl;
+                        }
+                        <td>@Html.Raw("<a target='_blank' href='" + _shortUrl + "'>" + _shortUrl + "</a>")</td>
+                        <td>@Html.DisplayFor(modelItem => item.NoClicks)</td>
+                        <td>@Html.Raw("<a href='javascript:;' onclick='showDetails(this);'>Show</a>")</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }

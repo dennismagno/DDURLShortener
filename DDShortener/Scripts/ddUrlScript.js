@@ -24,6 +24,7 @@ function createShortUrl() {
                 $('#urlResult').append(data.message);
             }
             $("#short-url").show();
+            ReloadList();
         }
     });
 }
@@ -37,4 +38,22 @@ function showDetails(e) {
     $('#urlResult').append('<a href="' + _url + '" target="_blank">' + _url + '</a>');
     qrcode.makeCode(_url);
     $("#short-url").show();
+}
+
+function ReloadList()
+{
+    var _url = '/Home/_UrlList';
+    $.ajax({
+        url: _url,
+        dataType: 'html',
+        async: true,
+        jsonp: false,
+        type: "POST",
+        error: function (xhr, textStatus, errorThrown) {
+        },
+        success: function (data) {
+            $('#url-list').text("");
+            $('#url-list').append(data);
+        }
+    });
 }
