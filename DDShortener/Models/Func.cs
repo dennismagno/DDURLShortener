@@ -8,6 +8,11 @@ namespace DDShortener.Models
 {
     public static class Func
     {
+        /// <summary>
+        /// Check if long URL is a valid
+        /// </summary>
+        /// <param name="url"></param>
+        /// <returns></returns>
         public static bool IsUrlExists(string url)
         {
             try
@@ -29,6 +34,10 @@ namespace DDShortener.Models
             }
         }
 
+        /// <summary>
+        /// Generate random 6 alphanumeric string
+        /// </summary>
+        /// <returns></returns>
         public static string CreateShortString()
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
