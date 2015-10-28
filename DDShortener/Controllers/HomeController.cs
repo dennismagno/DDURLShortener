@@ -23,17 +23,43 @@ namespace DDShortener.Controllers
             return View();
         }
 
+
+        public ActionResult UrlNotFound()
+        {
+            return View();
+        }
+
         public ActionResult RedirectShortURL(string shortURL)
         {
-            ViewBag.Message = "Your app description page.";
-
-            return View();
+            if (string.IsNullOrEmpty(shortURL))
+            {
+                return RedirectToAction("UrlNotFound", "Home");
+            }
+            else
+            {
+                URL longURL = _db.Urls.Where(u => u.ShortUrl.ToLower() == shortURL.ToLower()).FirstOrDefault();
+                if (longURL != null)
+                {
+                    longURL.NoClicks++;
+                    _db.SaveChanges();
+                    return Redirect(longURL.LongUrl);
+                }
+                else
+                {
+                    return RedirectToAction("UrlNotFound", "Home");
+                }
+            }
         }
 
         [AllowAnonymous]
         [HttpPost]
         public ActionResult ShortenURL(string Url)
         {
+            if (string.IsNullOrEmpty(Url))
+            {
+
+            }
+
             string _url = Url;
             if (!_url.ToLower().StartsWith("http") && !_url.ToLower().StartsWith("https"))
             {
@@ -73,7 +99,7 @@ namespace DDShortener.Controllers
                 }
                 catch (Exception)
                 {
-                    
+
                     throw;
                 }
             }
