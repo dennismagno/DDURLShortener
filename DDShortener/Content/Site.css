@@ -35,15 +35,16 @@ input[type="checkbox"].input-validation-error {
 }
 
 .add-on .input-group-btn > .btn {
-  border-left-width:0;left:-2px;
-  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
-  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    border-left-width: 0;
+    left: -2px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
 }
 
 .img-circle {
-    margin-top:20px;
+    margin-top: 20px;
     border-radius: 50%;
-    width:200px;
+    width: 200px;
 }
 
 #qrcode {
@@ -52,7 +53,113 @@ input[type="checkbox"].input-validation-error {
     margin-top: 5px;
 }
 
-#qrcode img {
-    width: 105px;
-    height: 105px;
+    #qrcode img {
+        width: 105px;
+        height: 105px;
+    }
+
+.game-board {
+    border-radius: 20px;
+    background-color: #BCAD9F;
+    padding: 20px 25px 15px 32px;
+    margin-left: 25px;
+    width: 370px;
+}
+
+.game-tile {
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    height: 80px;
+    width: 80px;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+}
+
+.tile-score {
+    background-color:#B9AB9E;
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    height: 68px;
+    width: 150px;
+    position: relative;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-left:10px;
+    float: left;
+}
+
+.tile-score h4 {
+    text-align: center;
+    margin-top:5px;
+    margin-bottom:5px;
+    color:white;
+}
+
+.tile-score h2 {
+    text-align: center;
+    margin-top:5px;
+    margin-bottom:5px;
+    color:white;
+}
+
+.game-tile h2 {
+    text-align: center;
+}
+
+
+.tile-0 {
+    background-color: #C5BFAF;
+}
+
+.tile-2 {
+    background-color: #EEE4DA;
+}
+
+.tile-4 {
+    background-color: #ECE0CA;
+}
+
+.tile-8 {
+    background-color: #F1AF79;
+}
+
+.tile-16 {
+    background-color: #F39462;
+}
+
+.tile-32 {
+    background-color: #F57C5F;
+}
+
+.tile-64 {
+    background-color: #EB603C;
+}
+
+.tile-128 {
+    background-color: #ECCE71;
+}
+
+.tile-256 {
+    background-color: #EDCC61;
+}
+
+.tile-512 {
+    background-color: #ECC850;
+}
+
+.tile-1024 {
+    background-color: #EDC53F;
+}
+
+.tile-2048 {
+    background-color: #EBC22D;
+}
+
+.tile-4096 {
+    background-color: #3E3933;
 }

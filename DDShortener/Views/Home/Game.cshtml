@@ -2,8 +2,15 @@
     ViewBag.Title = "2048 Game";
 }
 
-<h2>@ViewBag.Title</h2>
+<h2 style="margin-top:10px;">@ViewBag.Title</h2>
 
+<div class="row">
+    <div class="tile-score">
+        <h4>Score</h4>
+        <h2 id="cur-score">0</h2>
+    </div>
+    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#confirm-restart">Restart</button>
+</div>
 <div class="row">
     <div style="padding-left:0px;">
         <div class="row">
@@ -19,6 +26,38 @@
                         }
                     </div>
                 }
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="game-over">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">2048</h4>
+            </div>
+            <div class="modal-body">
+                <p>Game over</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="GameStart();" data-dismiss="modal">Play Agin</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<div class="modal fade" id="confirm-restart" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">2048</h4>
+            </div>
+            <div class="modal-body">
+                <p>Are you sure you want to restart this game?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-danger btn-ok" onclick="GameStart();" data-dismiss="modal">Restart Game</a>
             </div>
         </div>
     </div>

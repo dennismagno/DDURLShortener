@@ -252,6 +252,8 @@
     <Content Include="Global.asax" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Images\mephp.jpg" />
+    <Content Include="Scripts\alterclass.js" />
+    <Content Include="Scripts\dd2048Script.js" />
     <Content Include="Scripts\ddUrlScript.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
@@ -309,6 +311,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\UrlNotFound.cshtml" />
     <Content Include="Views\Home\_UrlList.cshtml" />
+    <Content Include="Views\Home\Game.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
