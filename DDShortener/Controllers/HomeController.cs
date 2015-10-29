@@ -133,5 +133,10 @@ namespace DDShortener.Controllers
 
             return Json(new { status = false, message = _error }, JsonRequestBehavior.AllowGet);
         }
+
+        public ActionResult Game()
+        {
+            return View();
+        }
     }
 }
